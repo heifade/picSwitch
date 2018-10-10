@@ -1,0 +1,79 @@
+<html>
+
+<head>
+  <link href="./styles.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="div1" id='div1'></div>
+
+  <div class="div1" id='div2'></div>
+
+  <div class="div1" id='div3'></div>
+
+  <div class="div1" id='div4'></div>
+
+  <div class="div1" id='div5'></div>
+
+  <script>
+
+    function MP(div) {
+      this.i = 0;
+      this.isMouseIn = false;
+      this.div = div;
+      let I = this;
+      this.div.onmouseenter = function () {
+        I.isMouseIn = true;
+        I.i = 0;
+        I.add();
+      }
+      this.div.onmouseout = function () {
+        I.isMouseIn = false;
+        I.cot();
+      }
+    }
+    MP.prototype.add = function () {
+      let I = this;
+      if (this.i < 24 && this.isMouseIn) {
+        requestAnimationFrame(function () {
+          I.div.className = `div1 div1-${I.i}`;
+          I.add();
+        });
+        I.i++;
+      }
+    }
+    MP.prototype.cot = function () {
+      let I = this;
+      if (this.i > -1) {
+        requestAnimationFrame(function () {
+          I.div.className = `div1 div1-${I.i}`;
+          I.cot();
+        });
+        I.i--;
+      }
+    }
+
+    new MP(document.getElementById('div1'));
+    new MP(document.getElementById('div2'));
+    new MP(document.getElementById('div3'));
+    new MP(document.getElementById('div4'));
+    new MP(document.getElementById('div5'));
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>
+
+
+<script>
+  let line = '';
+  for (let i = 0; i < 25; i++) {
+    line += `.div1-${i} {background-position: 0 -${108 * i}px;}\n`;
+  }
+  console.log(line);
+</script>
